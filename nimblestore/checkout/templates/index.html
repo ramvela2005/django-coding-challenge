@@ -22,10 +22,13 @@
 
     <h2>Place an Order</h2>
     <form id="order-form">
-        <label for="product-name">Product Name:</label><br>
-        <input type="text" id="product-name" name="product-name"><br>
-        <label for="quantity">Quantity:</label><br>
-        <input type="number" id="quantity" name="quantity"><br>
+        <div id="product-fields">
+            <label for="product-name-0">Product Name:</label><br>
+            <input type="text" id="product-name-0" name="product-name"><br>
+            <label for="quantity-0">Quantity:</label><br>
+            <input type="number" id="quantity-0" name="quantity"><br>
+        </div>
+        <button type="button" onclick="addProduct()">Add Another Product</button><br>
         <input type="submit" value="Submit Order">
     </form>
 
@@ -48,16 +51,47 @@
                 .catch(error => console.error('Error:', error));
         }
 
+        function addProduct() {
+            const productFields = document.getElementById('product-fields');
+            const productCount = productFields.childElementCount / 2; // Each product has two input fields
+            const nameLabel = document.createElement('label');
+            nameLabel.setAttribute('for', `product-name-${productCount}`);
+            nameLabel.textContent = 'Product Name:';
+            const nameInput = document.createElement('input');
+            nameInput.setAttribute('type', 'text');
+            nameInput.setAttribute('id', `product-name-${productCount}`);
+            nameInput.setAttribute('name', 'product-name');
+            const quantityLabel = document.createElement('label');
+            quantityLabel.setAttribute('for', `quantity-${productCount}`);
+            quantityLabel.textContent = 'Quantity:';
+            const quantityInput = document.createElement('input');
+            quantityInput.setAttribute('type', 'number');
+            quantityInput.setAttribute('id', `quantity-${productCount}`);
+            quantityInput.setAttribute('name', 'quantity');
+            productFields.appendChild(nameLabel);
+            productFields.appendChild(document.createElement('br'));
+            productFields.appendChild(nameInput);
+            productFields.appendChild(document.createElement('br'));
+            productFields.appendChild(quantityLabel);
+            productFields.appendChild(document.createElement('br'));
+            productFields.appendChild(quantityInput);
+            productFields.appendChild(document.createElement('br'));
+        }
+
         document.getElementById('order-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the form from being submitted normally
-            const productName = document.getElementById('product-name').value;
-            const quantity = document.getElementById('quantity').value;
+            const productNames = document.querySelectorAll('[name="product-name"]');
+            const quantities = document.querySelectorAll('[name="quantity"]');
+            const products = [];
+            for (let i = 0; i < productNames.length; i++) {
+                products.push({product: productNames[i].value, quantity: quantities[i].value});
+            }
             fetch(`${apiURL}/order/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({product: productName, quantity: quantity}),
+                body: JSON.stringify(products),
             })
             .then(response => response.json())
             .then(data => {
