@@ -2,6 +2,8 @@
 
 ## Setup
 
+Clone this repository using GIT. I recommend you use Github Desktop or VS Code (see point 1 in Development)
+
 To run this project you need to install any recent version of Python. Preferably Python 3.9+ After that you are advised to create a virtual environment so that your dependencies are contained within the workspace. **On Windows, make sure to add Python to your PATH, you may need to logout or reboot to run python** 
 
 Once you have Python installed and working, you can install the project dependencies by running `pip install -r requirements.txt`. This will install everything for you, then you can run migrations with `python manage.py migrate` (make sure to run this command within the nimblestore directory).
