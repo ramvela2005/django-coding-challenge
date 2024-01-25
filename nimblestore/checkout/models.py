@@ -3,5 +3,6 @@ from django.db import models
 # Create your models here.
 
 class Product(models.Model):
-    # Create your model here
+    # TODO Create your model here
+    # Add properties name, price and quantity
     pass
