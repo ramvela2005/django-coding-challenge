@@ -17,6 +17,7 @@ class ProductListView(viewsets.ModelViewSet):
 
 class OrderView(APIView):
     parser_classes = (JSONParser,)
+    authentication_classes = []
 
     def post(self, request):
         """
@@ -24,7 +25,7 @@ class OrderView(APIView):
         """
         print(request.data)
         
-        response_obj = {}
+        response_obj = {"total": 0}
 
         # TODO Calculate the order total here
 
