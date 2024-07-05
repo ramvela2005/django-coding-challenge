@@ -33,10 +33,7 @@ python manage.py migrate
 
 ## Unit Tests
 
-- **Unit Tests with pytest**: Write unit tests for your code using `pytest`. Ensure you cover different scenarios, including edge cases. To install `pytest`, you can run:
-  ```bash
-  pip install pytest
-  ```
+- **Unit Tests with pytest**: Write unit tests for your code using `pytest`. Ensure you cover different scenarios, including edge cases.
   To run your tests, use the command:
   ```bash
   pytest
@@ -45,27 +42,7 @@ python manage.py migrate
 
 ## Pre-commit Hooks
 
-- **Pre-commit**: Install `pre-commit` to ensure code quality before commits. Pre-commit hooks can automatically format your code and run tests before each commit. To install `pre-commit`, run:
-  ```bash
-  pip install pre-commit
-  ```
-  After installing `pre-commit`, create a `.pre-commit-config.yaml` file in the root directory of your project with the following content:
-  ```yaml
-  repos:
-  - repo: https://github.com/psf/black
-    rev: 21.9b0
-    hooks:
-      - id: black
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.812
-    hooks:
-      - id: mypy
-  - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: v1.7.2
-    hooks:
-      - id: python-check-blanket-noqa
-      - id: python-no-log-warn
-  ```
+- **Pre-commit**: Install `pre-commit` to ensure code quality before commits. Pre-commit hooks can automatically format your code and run tests before each commit. `pre-commit` should have been installed by the previous commmands, yet you still have to run the following:
   Initialize the pre-commit hooks with:
   ```bash
   pre-commit install
